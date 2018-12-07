@@ -1,3 +1,5 @@
+//hello
+
 package grab;
 
 import javafx.application.Application;
@@ -17,6 +19,8 @@ import java.sql.*;
 public class Main extends Application {
     
  private static Statement stmt;
+ public static int riderID = 1;
+ public static Connection con;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -38,7 +42,7 @@ public class Main extends Application {
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grab_db", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grab_db", "root", "1234");
             System.out.println("Successfully connected to the Database!");
             stmt = con.createStatement();
         } catch (ClassNotFoundException ex) {
@@ -93,6 +97,7 @@ public class Main extends Application {
         String cellphoneNo = LoginController.mobile;
         String list = "SELECT mobileNo as 'numbers' FROM rider";
         String n;
+        int count = 0;
         boolean status = false;
         
         try {
@@ -100,8 +105,11 @@ public class Main extends Application {
             
             while (rs.next()) {
                 n = rs.getString("numbers");
-                if(n.equals(cellphoneNo))
+                if(n.equals(cellphoneNo)){
+                    riderID = count;
                     status =  true;
+                }
+                count++;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,5 +117,53 @@ public class Main extends Application {
         
         return status;
     }
+    
+    public static int getRiderID(){
+        
+        return riderID;
+    }
+    
+    //Gets the User Logged In
+    public String getLoginUser(){
+        String mobile = LoginController.mobile;
+        String query = "SELECT CONCAT(givenName, \" \" , lastName) as 'name' FROM rider WHERE mobileNo = "+mobile+"";
+        String user = null;
+        
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                user = rs.getString("name");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        return user;
+    }
+    
+    //Gets the Distance of the Trip
+    public float getDistanceTrip(){
+        String fromText = MapController.fromText;
+        String toText = MapController.toText;
+        
+        System.out.println(fromText);
+        String query = "SELECT distance as 'dist' FROM trip WHERE startPoint = '"+fromText+"' AND endPoint = '"+toText+"'";
+        float distance = 0;
+        
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                distance = rs.getFloat("dist");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        return distance;
+    }
+    
+    //Gets the Price of the Trip
     
 }

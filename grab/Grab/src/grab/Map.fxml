@@ -17,16 +17,16 @@
             <Image url="@Map.png" />
          </image>
       </ImageView>
-      <TextField fx:id="fromID" layoutX="242.0" layoutY="183.0" prefHeight="25.0" prefWidth="348.0" />
-      <TextField fx:id="fromID1" layoutX="242.0" layoutY="230.0" prefHeight="25.0" prefWidth="348.0" />
-      <Button layoutX="184.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="GrabCar" />
-      <Button layoutX="286.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="GrabShare" />
-      <Button layoutX="381.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="GrabTaxi" />
-      <Button layoutX="462.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="GrabCar (6 Seaters)" />
-      <Button layoutX="301.0" layoutY="316.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="GrabCar+(Premium)" />
+      <TextField fx:id="fromTextField" layoutX="242.0" layoutY="183.0" prefHeight="25.0" prefWidth="348.0" />
+      <TextField fx:id="toTextField" layoutX="242.0" layoutY="230.0" prefHeight="25.0" prefWidth="348.0" />
+      <Button fx:id="grabCarButton" layoutX="184.0" layoutY="276.0" mnemonicParsing="false" onAction="#useGrabCar" prefHeight="25.0" prefWidth="86.0" text="GrabCar" />
+      <Button fx:id="grabShareButton" layoutX="286.0" layoutY="276.0" mnemonicParsing="false" onAction="#useGrabShare" prefHeight="25.0" prefWidth="80.0" text="GrabShare" />
+      <Button fx:id="grabTaxiButton" layoutX="381.0" layoutY="276.0" mnemonicParsing="false" onAction="#useGrabTaxi" prefHeight="25.0" prefWidth="72.0" text="GrabTaxi" />
+      <Button fx:id="grabCarSixButton" layoutX="462.0" layoutY="276.0" mnemonicParsing="false" onAction="#useGrabCarSix" prefHeight="25.0" prefWidth="125.0" text="GrabCar (6 Seater)" />
+      <Button fx:id="grabPremiumButton" layoutX="301.0" layoutY="316.0" mnemonicParsing="false" onAction="#useGrabPremium" prefHeight="25.0" prefWidth="170.0" text="GrabCar+(Premium)" />
       <Label layoutX="193.0" layoutY="187.0" prefHeight="17.0" prefWidth="38.0" text="From" />
       <Label layoutX="198.0" layoutY="232.0" text="To" />
-      <Label layoutX="68.0" layoutY="127.0" text="Name" />
+      <Label fx:id="nameLabel" contentDisplay="CENTER" layoutX="45.0" layoutY="127.0" prefHeight="17.0" prefWidth="72.0" text="Name" visible="false" />
       <Button fx:id="acctButton" layoutX="48.0" layoutY="55.0" mnemonicParsing="false" onAction="#moveToAccount" opacity="0.0" prefHeight="59.0" prefWidth="62.0" text="Account" />
       <Button fx:id="historyButton" layoutX="42.0" layoutY="203.0" mnemonicParsing="false" onAction="#moveToHistory" opacity="0.0" prefHeight="25.0" prefWidth="82.0" text="History" />
       <Button fx:id="mapButton" layoutX="31.0" layoutY="3.0" mnemonicParsing="false" onAction="#moveToMap" opacity="0.0" prefHeight="44.0" prefWidth="105.0" text="Map" />
@@ -65,7 +65,7 @@
          </font>
       </Label>
       <Label fx:id="tripTypeLabel" layoutX="337.0" layoutY="440.0" text="tripType" />
-      <Label layoutX="183.0" layoutY="440.0" text="distance" />
+      <Label fx:id="distanceLabel" layoutX="183.0" layoutY="440.0" text="distance" />
       <Button fx:id="logOutButton" layoutX="50.0" layoutY="436.0" mnemonicParsing="false" onAction="#moveToLogIn" text="Log Out" />
    </children>
 </AnchorPane>

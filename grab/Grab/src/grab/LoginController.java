@@ -44,25 +44,32 @@ public class LoginController implements Initializable{
     }
 
     public void loggingIn (javafx.event.ActionEvent actionEvent) throws IOException {
+        String admin = "00000000000";
+        mobile = mobileTextField.getText();
 
-            mobile = mobileTextField.getText();
-            
-            if(user.checkAccount()){
-                System.out.println("Valid Account!");
-                
-                FXMLLoader load = new FXMLLoader (getClass().getResource("Map.fxml"));
-                Parent fieldParent = load.load();
-                Scene scene = new Scene(fieldParent);
-                MapController controller = load.getController();
-                Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
-                
-            } else {
-                System.out.println("Invalid Account!");
-                invalidityLabel.setVisible(true);
-                mobileTextField.setText("");
-            }
+        if (mobile.equals(admin)) {
+            System.out.println("Admin Account.");
+            FXMLLoader load = new FXMLLoader(getClass().getResource("Admin.fxml"));
+            Parent fieldParent = load.load();
+            Scene scene = new Scene(fieldParent);
+            AdminController controller = load.getController();
+            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+        } else if(user.checkAccount()){
+            System.out.println("Valid Account!");
+            FXMLLoader load = new FXMLLoader (getClass().getResource("Map.fxml"));
+            Parent fieldParent = load.load();
+            Scene scene = new Scene(fieldParent);
+            MapController controller = load.getController();
+            Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+        } else {
+            System.out.println("Invalid Account!");
+            invalidityLabel.setVisible(true);
+            mobileTextField.setText("");
+        }
     }
 }
 
